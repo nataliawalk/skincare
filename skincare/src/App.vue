@@ -1,43 +1,37 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref} from 'vue'
 
-const date = ref(null)
-const formattedDate = ref(null);
-const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+import Header from './components/Header.vue'
+import DatePicker from './components/DatePicker.vue'
 
-watch(date, (newDate) => {
-  if (newDate) {
-    const selectedDate = new Date(newDate);
-    const day = selectedDate.getDay();
-    const date = selectedDate.getDate();
-    const month = selectedDate.getMonth()+1;
-    const year = selectedDate.getFullYear();
-    const monthName = monthNames[month];
-    const dayName = dayNames[day];
+const childMsg = ref('No child msg yet')
 
-    formattedDate.value = `${dayName} / ${date} / ${month} / ${year}`;
-
-  }
-});
 </script>
 
 <template>
 
-  <div>{{formattedDate}}</div>
-  
-  <v-container>
-    <v-row justify="space-around">
-      <v-date-picker v-model="date" elevation="24"></v-date-picker>
-    </v-row>
-  </v-container>
+  <Header />
+
+  <DatePicker />
 
 
 
-  <v-icon icon="mdi-home" />
-  <v-btn class="red white--text">click me</v-btn>
+
+      
+
+    <v-container class="text-center">
+      <v-row justify="center"> 
+        <v-col cols="12" sm="6" md="4">
+          <v-btn block rounded="lg" size="x-large">Rounded lg</v-btn>
+        </v-col>
+        <v-col cols="12" sm="6" md="4">
+          <v-btn block rounded="xl" size="x-large" color="red">Rounded xl</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+
+
+
 
 
 </template>
