@@ -8,10 +8,6 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-
-const emit = defineEmits(['response'])
-
-
 watch(date, (newDate) => {
   if (newDate) {
     const selectedDate = new Date(newDate);
@@ -23,18 +19,11 @@ watch(date, (newDate) => {
     const dayName = dayNames[day];
 
     formattedDate.value = `${dayName} / ${date} / ${month} / ${monthName} /${year}`;
-
-    emit('response', formattedDate.value);
   }
 });
-
-
-
-
 </script>
 
 <template>
-
     <div>{{formattedDate}}</div>
         
     <v-container>

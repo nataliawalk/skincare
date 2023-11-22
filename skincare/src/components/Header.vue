@@ -1,36 +1,57 @@
 <script setup>
 import { ref } from 'vue';
 
-import FormattedDateDisplay from './FormattedDateDisplay.vue'
-
 const tab = ref('Routine');
 const items = ref(['Routine', 'Your Stash', 'Templates', 'Tips']);
 const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 
-const childMsg = ref('No child msg yet')
+import { useTheme } from 'vuetify'
+const theme = useTheme()
+const toggleTheme = () => {
+  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
+}
+
+const darkModeIcon = ref(false);
+const toggleDarkModeIcon = () => {
+  darkModeIcon.value = !darkModeIcon.value;
+}
+
+const toggleDarkMode = () => {
+  toggleTheme();
+  toggleDarkModeIcon();
+}
 
 </script>
 
 <template>
-    <header>
-        <div class="navbar">
-        <v-btn prepend-icon="mdi-calendar" variant="plain">
+
+
+      <v-app-bar :elevation="0" >
+
+          <!-- <v-btn prepend-icon="mdi-calendar">
             today
             <v-icon icon="mdi-chevron-down" />
-        </v-btn>
-        <h1 class="font-weight-bold font-italic header-text">
-            Skincare.
-        </h1>
-        </div>
-    </header>
+          </v-btn> -->
 
-    <FormattedDateDisplay @response="(msg) => childMsg = msg" />
-    <p>{{ childMsg }}</p>
+          <v-btn icon="mdi-calendar"></v-btn>
+        
+          <v-app-bar-title class="font-weight-bold font-italic header-title text-center">Skincare.</v-app-bar-title>
+          
+          <v-btn icon 
+          @click="toggleDarkMode"
+          >
+            <span v-if="darkModeIcon" class="material-symbols-outlined">light_mode</span>
+            <span v-else class="material-symbols-outlined">dark_mode</span>
+          </v-btn>
+
+      </v-app-bar>
 
 
       <v-tabs
         v-model="tab"
         align-tabs="center"
+        height="100"
+
       >
         <v-tab
           v-for="item in items"
@@ -38,11 +59,12 @@ const childMsg = ref('No child msg yet')
           :value="item"
           min-width="250"
           class="text-none"
+          height="160"
         >
           {{ item }}
         </v-tab>
       </v-tabs>
-      
+
       <v-divider></v-divider>
 
       <v-window v-model="tab">
@@ -57,22 +79,11 @@ const childMsg = ref('No child msg yet')
         </v-window-item>
       </v-window>
 
+      
+
 </template>
   
 <style scoped>
-.navbar {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    margin: 0 1em;
-}
-.header-text {
-    font-family: 'Inter', sans-serif;
-    text-align: center;
-    margin: 0.4em 0;
-    margin-left: auto;
-    margin-right: auto;
-}
 .v-btn {
     letter-spacing: 0.05em;
     font-weight: 400;    
