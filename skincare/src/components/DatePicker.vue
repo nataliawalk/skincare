@@ -28,7 +28,7 @@ watch(date, (newDate) => {
         
     <v-container>
     <v-row justify="space-around">
-        <v-date-picker v-model="date" elevation="6" ></v-date-picker>
+        <v-date-picker v-model="date" elevation="24" ></v-date-picker>
     </v-row>
     </v-container>
 </template>
